@@ -15,11 +15,11 @@ public class FilterApiImpl implements FilterApi {
 
 	@Override
 	public List<User> unverifiedUnder18() {
-		return userService.list(); //FIXME
+		return userService.list(); //FIXME currently returns all the users unfiltered, you should fix this method
 	}
 
 	@Override
 	public List<User> verifiedWithTrPrimaryPhone() {
-		return userService.list(); //FIXME
+		return userService.list(); //FIXME currently returns all the users unfiltered, you should fix this method
 	}
 }

@@ -62,7 +62,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void delete(Long id) {
-
+		throw new UnsupportedOperationException("Not implemented!");
 	}
 
 }

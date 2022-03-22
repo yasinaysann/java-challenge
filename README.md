@@ -9,6 +9,8 @@ A phone number,
   - should be at least 5-char long when it starts with `+`
   - should be exactly 13-char long when it starts with `+90` (e.g. `+905329998877`) but can be at any length otherwise as long as it adheres other requirements
 
+Any failed business requirement should throw an `java.lang.IllegalArgumentException`.
+
 2. Implement `FilterApiImpl` methods
 
 3. There's a failing test for `UserService#update`. Find the cause and fix it.
