@@ -53,11 +53,11 @@ class PhoneTest {
         var phone_1 = new Phone("+1234");
         assertEquals("+1234", phone_1.number(), "can be at any length otherwise as long as it adheres other requirements");
         var phone_2 = new Phone("+10987654321");
-        assertEquals("+1234", phone_2.number(), "can be at any length otherwise as long as it adheres other requirements");
+        assertEquals("+10987654321", phone_2.number(), "can be at any length otherwise as long as it adheres other requirements");
         var phone_3 = new Phone("+391234567890");
-        assertEquals("+1234", phone_3.number(), "can be at any length otherwise as long as it adheres other requirements");
+        assertEquals("+391234567890", phone_3.number(), "can be at any length otherwise as long as it adheres other requirements");
         var phone_4 = new Phone("+9912345678901");
-        assertEquals("+1234", phone_4.number(), "can be at any length otherwise as long as it adheres other requirements");
+        assertEquals("+9912345678901", phone_4.number(), "can be at any length otherwise as long as it adheres other requirements");
     }
 
     @Test
