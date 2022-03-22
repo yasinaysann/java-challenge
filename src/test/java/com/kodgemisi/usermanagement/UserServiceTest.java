@@ -96,20 +96,20 @@ class UserServiceTest {
                 raffaello.getId(),
                 new Profile(
                         raffaello.getProfile().getAvatarUrl(),
-                        raffaello.getProfile().getAddress(),
-                        raffaello.getProfile().getPrimaryPhone(),
+                        "Florida, U.S.",
+                        new Phone("+232972510919"),
                         raffaello.getProfile().getPrimaryEmail(),
                         raffaello.getProfile().getPhones(),
                         raffaello.getProfile().getEmails(),
-                        raffaello.getProfile().getLanguage()
+                        Language.EN
                 ),
-                raffaello.getAge(),
-                raffaello.isVerified(),
-                raffaello.getRole(),
+                23,
+                true,
+                Role.ADMIN,
                 raffaello.getCreatedAt()
         );
 
-        var updatedRafaello = userDao.update(raffaello);
+        var updatedRafaello = userService.update(raffaello);
 
         assertEquals(raffaello.getId(), updatedRafaello.getId());
         assertEquals(raffaello.getProfile().getAvatarUrl(), updatedRafaello.getProfile().getAvatarUrl());
