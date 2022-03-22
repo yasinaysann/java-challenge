@@ -34,4 +34,19 @@ public class Phone implements CharSequence {
 	public String toString() {
 		return phoneNumber;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Phone phone = (Phone) o;
+
+		return phoneNumber.equals(phone.phoneNumber);
+	}
+
+	@Override
+	public int hashCode() {
+		return phoneNumber.hashCode();
+	}
 }

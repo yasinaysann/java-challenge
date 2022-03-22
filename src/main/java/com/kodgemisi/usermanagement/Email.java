@@ -59,4 +59,22 @@ public class Email implements CharSequence {
 	public String toString() {
 		return email;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Email email1 = (Email) o;
+
+		if (verified != email1.verified) return false;
+		return email.equals(email1.email);
+	}
+
+	@Override
+	public int hashCode() {
+		int result = email.hashCode();
+		result = 31 * result + (verified ? 1 : 0);
+		return result;
+	}
 }
