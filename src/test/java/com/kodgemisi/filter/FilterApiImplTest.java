@@ -28,7 +28,7 @@ class FilterApiImplTest {
                         Set.of(new Email("psichel@verizon.net")),
                         Language.TR
                 ),
-                23,
+                18,
                 true,
                 Role.ADMIN,
                 Instant.now()
@@ -47,9 +47,9 @@ class FilterApiImplTest {
                         Set.of(new Email("preneel@me.com")),
                         Language.EN
                 ),
-                11,
+                18,
                 false,
-                Role.ANONYMOUS,
+                Role.USER,
                 Instant.now()
         );
 
@@ -66,7 +66,7 @@ class FilterApiImplTest {
                         Set.of(new Email("drewf@hotmail.com")),
                         Language.EN
                 ),
-                18,
+                23,
                 true,
                 Role.ANONYMOUS,
                 Instant.now()
@@ -85,23 +85,63 @@ class FilterApiImplTest {
                         Set.of(new Email("josem@aol.com")),
                         Language.TR
                 ),
-                9,
+                25,
                 false,
-                Role.OBSERVER,
+                Role.USER,
                 Instant.now()
         );
 
         userDao.create(donatello);
 
+        var faraday = new User(
+                null,
+                new Profile(
+                        "https://upload.wikimedia.org/wikipedia/commons/1/19/Michael_Faraday._Photograph_by_Maull_%26_Polyblank._Wellcome_V0026348.jpg",
+                        "Newington Butts, England",
+                        new Phone("+905616115132"),
+                        new Email("bthomas77@mobisb.site"),
+                        Set.of(new Phone("+12509062309")),
+                        Set.of(new Email("drmarc@authorizes.me")),
+                        Language.EN
+                ),
+                9,
+                true,
+                Role.OBSERVER,
+                Instant.now()
+        );
+
+        userDao.create(faraday);
+
+        var maxwell = new User(
+                null,
+                new Profile(
+                        "https://upload.wikimedia.org/wikipedia/commons/5/57/James_Clerk_Maxwell.png",
+                        "Edinburgh, Scotland",
+                        new Phone("+905108837548"),
+                        new Email("mailforreg2011@supox.site"),
+                        Set.of(new Phone("+14037293654")),
+                        Set.of(new Email("danielaussilva@onlinecmail.com")),
+                        Language.TR
+                ),
+                11,
+                false,
+                Role.USER,
+                Instant.now()
+        );
+
+        userDao.create(maxwell);
+
         final var userService = new UserService(userDao);
         final var filterApi = new FilterApiImpl(userService);
 
-        var unverifiedUserList = filterApi.unverifiedUnder18();
+        var resultList = filterApi.unverifiedUnder18();
 
-        assertTrue(unverifiedUserList.contains(raffaello));
-        assertTrue(unverifiedUserList.contains(donatello));
-        assertFalse(unverifiedUserList.contains(leonardo));
-        assertFalse(unverifiedUserList.contains(michelangelo));
+        assertTrue(resultList.contains(maxwell));
+        assertFalse(resultList.contains(leonardo));
+        assertFalse(resultList.contains(raffaello));
+        assertFalse(resultList.contains(michelangelo));
+        assertFalse(resultList.contains(donatello));
+        assertFalse(resultList.contains(faraday));
 
     }
 
@@ -121,7 +161,7 @@ class FilterApiImplTest {
                         Set.of(new Email("psichel@verizon.net")),
                         Language.TR
                 ),
-                23,
+                18,
                 true,
                 Role.ADMIN,
                 Instant.now()
@@ -140,9 +180,9 @@ class FilterApiImplTest {
                         Set.of(new Email("preneel@me.com")),
                         Language.EN
                 ),
-                11,
+                18,
                 false,
-                Role.ANONYMOUS,
+                Role.USER,
                 Instant.now()
         );
 
@@ -159,7 +199,7 @@ class FilterApiImplTest {
                         Set.of(new Email("drewf@hotmail.com")),
                         Language.EN
                 ),
-                18,
+                23,
                 true,
                 Role.ANONYMOUS,
                 Instant.now()
@@ -178,23 +218,62 @@ class FilterApiImplTest {
                         Set.of(new Email("josem@aol.com")),
                         Language.TR
                 ),
-                9,
+                25,
                 false,
-                Role.OBSERVER,
+                Role.USER,
                 Instant.now()
         );
 
         userDao.create(donatello);
 
+        var faraday = new User(
+                null,
+                new Profile(
+                        "https://upload.wikimedia.org/wikipedia/commons/1/19/Michael_Faraday._Photograph_by_Maull_%26_Polyblank._Wellcome_V0026348.jpg",
+                        "Newington Butts, England",
+                        new Phone("+905616115132"),
+                        new Email("bthomas77@mobisb.site"),
+                        Set.of(new Phone("+12509062309")),
+                        Set.of(new Email("drmarc@authorizes.me")),
+                        Language.EN
+                ),
+                9,
+                true,
+                Role.OBSERVER,
+                Instant.now()
+        );
+
+        userDao.create(faraday);
+
+        var maxwell = new User(
+                null,
+                new Profile(
+                        "https://upload.wikimedia.org/wikipedia/commons/5/57/James_Clerk_Maxwell.png",
+                        "Edinburgh, Scotland",
+                        new Phone("+905108837548"),
+                        new Email("mailforreg2011@supox.site"),
+                        Set.of(new Phone("+14037293654")),
+                        Set.of(new Email("danielaussilva@onlinecmail.com")),
+                        Language.TR
+                ),
+                11,
+                false,
+                Role.USER,
+                Instant.now()
+        );
+
+        userDao.create(maxwell);
         final var userService = new UserService(userDao);
         final var filterApi = new FilterApiImpl(userService);
 
-        var unverifiedUserList = filterApi.verifiedWithTrPrimaryPhone();
+        var resultList = filterApi.verifiedWithTrPrimaryPhone();
 
-        assertTrue(unverifiedUserList.contains(leonardo));
-        assertTrue(unverifiedUserList.contains(donatello));
-        assertFalse(unverifiedUserList.contains(raffaello));
-        assertFalse(unverifiedUserList.contains(michelangelo));
+        assertTrue(resultList.contains(leonardo));
+        assertTrue(resultList.contains(faraday));
+        assertFalse(resultList.contains(raffaello));
+        assertFalse(resultList.contains(michelangelo));
+        assertFalse(resultList.contains(donatello));
+        assertFalse(resultList.contains(maxwell));
 
     }
 
