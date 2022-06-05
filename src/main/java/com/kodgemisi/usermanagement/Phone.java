@@ -18,7 +18,7 @@ public class Phone implements CharSequence {
 	public String checkPhoneNumber(String phoneNumber){
 		if (phoneNumber == null)
 			throw new IllegalArgumentException("A phone number cannot be null");
-		if (phoneNumber.isBlank())
+		if (phoneNumber.isEmpty())
 			throw new IllegalArgumentException("A phone number cannot be empty");
 		if(phoneNumber.contentEquals("112") || phoneNumber.contentEquals("911")){
 			return phoneNumber;
