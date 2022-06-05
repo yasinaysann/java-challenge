@@ -1,5 +1,8 @@
 package com.kodgemisi.usermanagement;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Represents an email and its verification status
  */
@@ -10,11 +13,7 @@ public class Email implements CharSequence {
 	public final boolean verified;
 
 	public Email(String email) {
-
-		validate(email);
-
-		this.email = email;
-		this.verified = false;
+		this(email,false);
 	}
 
 	public Email(String email, boolean verified) {
@@ -34,10 +33,16 @@ public class Email implements CharSequence {
 			throw new IllegalArgumentException("Email cannot be blank!");
 		}
 
-		final int atSignIndex = email.indexOf("@");
-		if (atSignIndex == 0 || atSignIndex > email.length() - 4) {
+
+		if (getEmailMatcher(email)) {
 			throw new IllegalArgumentException("Invalid email: '%s'!".formatted(email));
 		}
+	}
+
+	private static boolean getEmailMatcher(String email) {
+		Pattern emailRegex = Pattern.compile("^[(a-zA-Z-0-9-\\\\_\\\\+\\\\.)]+@[(a-z-A-z)]+\\\\.[(a-zA-z)]{2,3}$");
+		Matcher emailMatcher = emailRegex.matcher(email);
+		return emailMatcher.matches();
 	}
 
 	@Override
