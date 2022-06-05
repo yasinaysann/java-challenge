@@ -56,8 +56,20 @@ public class UserDaoImpl implements UserDao {
 		if (user.isNew()) {
 			throw new IllegalArgumentException("You can only update existing users (users with id). This user has no id");
 		}
+		Optional<User> updateUser = find(user.getId());
+		if (updateUser.isPresent()){
+			updateUser.get().setAge(user.getAge());
+			updateUser.get().setProfile(user.getProfile());
+			updateUser.get().setRole(user.getRole());
+			updateUser.get().setCreatedAt(user.getCreatedAt());
+			if (updateUser.get().isVerified() != user.isVerified()){
+				updateUser.get().verify();
+			}
+		}else {
+			throw new IllegalArgumentException("User Not Found");
+		}
 
-		return userMap.put(user.getId(), user);
+		return userMap.put(user.getId(), updateUser.get());
 	}
 
 	@Override
